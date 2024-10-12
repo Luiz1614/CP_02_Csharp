@@ -6,6 +6,17 @@ namespace CP2.API.Domain.Entities
     [Table("tb_")]
     public class VendedorEntity
     {
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public string Endereco { get; set; }
+        public DateTime DataContratacao { get; set; }
+        public decimal ComissaoPercentual { get; set; }
+        public decimal MetaMensal { get; set; }
+        public DateTime CriadoEm { get; set; }
     }
 }
