@@ -12,5 +12,33 @@ namespace CP2.API.Infrastructure.Data.Repositories
         {
             _context = context;
         }
+
+        public void Adicionar(FornecedorEntity fornecedor)
+        {
+            _context.Fornecedor.Add(fornecedor);
+            _context.SaveChanges();
+        }
+
+        public void Atualizar(FornecedorEntity fornecedor)
+        {
+            _context.Fornecedor.Update(fornecedor);
+            _context.SaveChanges();
+        }
+
+        public void Deletar(FornecedorEntity fornecedor)
+        {
+            _context.Fornecedor.Remove(fornecedor);
+            _context.SaveChanges();
+        }
+
+        public FornecedorEntity ObterPorId(int id)
+        {
+            return _context.Set<FornecedorEntity>().Find(id);
+        }
+
+        public IEnumerable<FornecedorEntity> ObterTodos()
+        {
+            return _context.Set<FornecedorEntity>().ToList();
+        }
     }
 }

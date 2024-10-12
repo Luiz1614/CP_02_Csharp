@@ -8,6 +8,6 @@ namespace CP2.API.Domain.Interfaces
         void Atualizar(FornecedorEntity fornecedor);
         void Deletar(FornecedorEntity fornecedor);
         FornecedorEntity ObterPorId(int id);
-        FornecedorEntity ObterTodos();
+        IEnumerable<FornecedorEntity> ObterTodos();
     }
 }
