@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CP2.API.Domain.Entities
 {
-    [Table("tb_")]
+    [Table("tb_Fornecedor")]
     public class FornecedorEntity
     {
         [Key]
