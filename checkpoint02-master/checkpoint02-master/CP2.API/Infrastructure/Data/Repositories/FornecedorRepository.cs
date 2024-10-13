@@ -28,12 +28,15 @@ namespace CP2.API.Infrastructure.Data.Repositories
                 _context.SaveChanges();
             }
         }
-
-
-        public void Deletar(FornecedorEntity fornecedor)
+        
+        public void Deletar(int id)
         {
-            _context.Fornecedor.Remove(fornecedor);
-            _context.SaveChanges();
+            var entity = _context.Fornecedor.Find(id);
+            if (entity != null)
+            {
+                _context.Fornecedor.Remove(entity);
+                _context.SaveChanges();
+            }
         }
 
         public FornecedorEntity ObterPorId(int id)

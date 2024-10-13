@@ -7,8 +7,8 @@ namespace CP2.API.Application.Interfaces
     {
         VendedorEntity? ObterVendedorPorId(int id);
         IEnumerable<VendedorEntity> ObterTodosVendedores();
-        VendedorEntity AdicionarVendedor(VendedorDto vendedorDto);
-        VendedorEntity AtualizarVendedor(int id, VendedorDto vendedorDto);
+        void AdicionarVendedor(VendedorDto vendedorDto);
+        void AtualizarVendedor(int id, VendedorDto vendedorDto);
         void DeletarVendedor(int id);
     }
 }

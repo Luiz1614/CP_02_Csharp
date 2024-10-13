@@ -6,8 +6,8 @@ namespace CP2.API.Domain.Interfaces
     {
         void Adicionar(VendedorEntity vendedor);
         void Atualizar(int id, VendedorEntity vendedor);
-        void Deletar(VendedorEntity vendedor);
+        void Deletar(int id);
         VendedorEntity ObterPorId(int id);
-        IEnumerable<FornecedorEntity> ObterTodos();
+        IEnumerable<VendedorEntity> ObterTodos();
     }
 }

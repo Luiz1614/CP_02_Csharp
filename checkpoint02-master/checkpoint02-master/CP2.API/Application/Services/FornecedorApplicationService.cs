@@ -9,7 +9,6 @@ namespace CP2.API.Application.Services
     public class FornecedorApplicationService : IFornecedorApplicationService
     {
         private readonly IFornecedorRepository _repository;
-        private readonly Mappings.MapperProfile _mapper;
 
         public FornecedorApplicationService(IFornecedorRepository repository)
         {
@@ -18,27 +17,46 @@ namespace CP2.API.Application.Services
 
         public FornecedorEntity? ObterFornecedorPorId(int id)
         {
-            
+            return _repository.ObterPorId(id);
         }
 
         public IEnumerable<FornecedorEntity> ObterTodosFornecedores()
         {
-            throw new NotImplementedException();
+            return _repository.ObterTodos();
         }
 
-        public FornecedorEntity AdicionarFornecedor(FornecedorDto fornecedorDto)
+        public void AdicionarFornecedor(FornecedorDto fornecedorDto)
         {
-            throw new NotImplementedException();
+            var fornecedorEntity = new FornecedorEntity()
+            {
+                Nome = fornecedorDto.Nome,
+                CNPJ = fornecedorDto.CNPJ,
+                Telefone = fornecedorDto.Telefone,
+                Email = fornecedorDto.Email,
+                Endereco = fornecedorDto.Endereco,
+                
+            };
+
+            _repository.Adicionar(fornecedorEntity);
         }
 
-        public FornecedorEntity AtualizarFornecedor(int id, FornecedorDto fornecedorDto)
+        public void AtualizarFornecedor(int id, FornecedorDto fornecedorDto)
         {
-            throw new NotImplementedException();
+            var fornecedorEntity = new FornecedorEntity()
+            {
+                Nome = fornecedorDto.Nome,
+                CNPJ = fornecedorDto.CNPJ,
+                Telefone = fornecedorDto.Telefone,
+                Email = fornecedorDto.Email,
+                Endereco = fornecedorDto.Endereco,
+            };
+
+            _repository.Atualizar(id, fornecedorEntity);
         }
 
         public void DeletarFornecedor(int id)
         {
-            throw new NotImplementedException();
+            _repository.Deletar(id);
         }
     }
 }
