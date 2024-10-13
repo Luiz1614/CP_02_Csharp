@@ -19,11 +19,16 @@ namespace CP2.API.Infrastructure.Data.Repositories
             _context.SaveChanges();
         }
 
-        public void Atualizar(FornecedorEntity fornecedor)
+        public void Atualizar(int id, FornecedorEntity fornecedor)
         {
-            _context.Fornecedor.Update(fornecedor);
-            _context.SaveChanges();
+            var existingEntity = _context.Set<FornecedorEntity>().Find(id);
+            if (existingEntity != null)
+            {
+                _context.Entry(existingEntity).CurrentValues.SetValues(fornecedor);
+                _context.SaveChanges();
+            }
         }
+
 
         public void Deletar(FornecedorEntity fornecedor)
         {
