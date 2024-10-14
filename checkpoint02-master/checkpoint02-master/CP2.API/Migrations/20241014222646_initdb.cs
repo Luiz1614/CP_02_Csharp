@@ -12,7 +12,7 @@ namespace CP2.API.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "tb_Fornecedor",
+                name: "CP_Fornecedor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "NUMBER(10)", nullable: false)
@@ -25,11 +25,11 @@ namespace CP2.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_Fornecedor", x => x.Id);
+                    table.PrimaryKey("PK_CP_Fornecedor", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "tb_Vendedor",
+                name: "CP_Vendedor",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "NUMBER(10)", nullable: false)
@@ -46,7 +46,7 @@ namespace CP2.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_tb_Vendedor", x => x.Id);
+                    table.PrimaryKey("PK_CP_Vendedor", x => x.Id);
                 });
         }
 
@@ -54,10 +54,10 @@ namespace CP2.API.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "tb_Fornecedor");
+                name: "CP_Fornecedor");
 
             migrationBuilder.DropTable(
-                name: "tb_Vendedor");
+                name: "CP_Vendedor");
         }
     }
 }

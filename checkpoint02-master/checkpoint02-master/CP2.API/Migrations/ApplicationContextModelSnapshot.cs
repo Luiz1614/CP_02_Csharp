@@ -52,7 +52,7 @@ namespace CP2.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_Fornecedor");
+                    b.ToTable("CP_Fornecedor");
                 });
 
             modelBuilder.Entity("CP2.API.Domain.Entities.VendedorEntity", b =>
@@ -96,7 +96,7 @@ namespace CP2.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_Vendedor");
+                    b.ToTable("CP_Vendedor");
                 });
 #pragma warning restore 612, 618
         }

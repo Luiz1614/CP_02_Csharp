@@ -12,8 +12,8 @@ using Oracle.EntityFrameworkCore.Metadata;
 namespace CP2.API.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20241014003739_AlterandoId")]
-    partial class AlterandoId
+    [Migration("20241014222646_initdb")]
+    partial class initdb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace CP2.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_Fornecedor");
+                    b.ToTable("CP_Fornecedor");
                 });
 
             modelBuilder.Entity("CP2.API.Domain.Entities.VendedorEntity", b =>
@@ -99,7 +99,7 @@ namespace CP2.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tb_Vendedor");
+                    b.ToTable("CP_Vendedor");
                 });
 #pragma warning restore 612, 618
         }

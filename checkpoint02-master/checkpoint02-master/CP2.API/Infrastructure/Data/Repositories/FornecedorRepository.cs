@@ -1,6 +1,7 @@
 ﻿using CP2.API.Infrastructure.Data.AppData;
 using CP2.API.Domain.Entities;
 using CP2.API.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CP2.API.Infrastructure.Data.Repositories
 {
@@ -22,9 +23,17 @@ namespace CP2.API.Infrastructure.Data.Repositories
         public void Atualizar(int id, FornecedorEntity fornecedor)
         {
             var existingEntity = _context.Set<FornecedorEntity>().Find(id);
+
             if (existingEntity != null)
             {
-                _context.Entry(existingEntity).CurrentValues.SetValues(fornecedor);
+                existingEntity.Nome = fornecedor.Nome;
+                existingEntity.CNPJ = fornecedor.CNPJ;
+                existingEntity.Telefone = fornecedor.Telefone;
+                existingEntity.Email = fornecedor.Email;
+                existingEntity.Endereco = fornecedor.Endereco;
+
+                _context.Entry(existingEntity).State = EntityState.Modified;
+
                 _context.SaveChanges();
             }
         }

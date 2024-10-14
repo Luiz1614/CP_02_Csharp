@@ -91,11 +91,7 @@ namespace CP2.API.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new
-                {
-                    Error = ex.Message,
-                    status = HttpStatusCode.BadRequest,
-                });
+                return BadRequest(ex.Message);
             }
         }
 
