@@ -24,85 +24,90 @@ namespace CP2.API.Presentation.Controllers
         [Produces<IEnumerable<VendedorEntity>>]
         public IActionResult Get()
         {
-            var objModel = _applicationService.ObterTodosVendedores();
-
-            if (objModel is not null)
-                return Ok(objModel);
-
-            return BadRequest("Não foi possivel obter os dados");
+            try
+            {
+                var vendedores = _applicationService.ObterTodosVendedores();
+                if (vendedores == null)
+                {
+                    return NoContent();
+                }
+                return Ok(vendedores);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Obtém um vendedor por ID", Description = "Este endpoint retorna um vendedor específico por ID.")]
         [Produces<VendedorEntity>]
         public IActionResult GetPorId(int id)
         {
-            var objModel = _applicationService.ObterVendedorPorId(id);
+            try
+            {
+                var vendedor = _applicationService.ObterVendedorPorId(id);
 
-            if (objModel is not null)
-                return Ok(objModel);
+                if (vendedor == null)
+                    return NoContent();
 
-            return BadRequest("Não foi possivel obter os dados");
+                return Ok(vendedor);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Adiciona um novo vendedor", Description = "Este endpoint adiciona um novo vendedor.")]
         [Produces<VendedorEntity>]
         public IActionResult Post([FromBody] VendedorDto entity)
         {
             try
             {
-                var objModel = _applicationService.SalvarDadosVendedor(entity);
-
-                if (objModel is not null)
-                    return Ok(objModel);
-
-                return BadRequest("Não foi possivel salvar os dados");
+                _applicationService.AdicionarVendedor(entity);
+                return Created();
             }
             catch (Exception ex)
             {
-                return BadRequest(new
-                {
-                    Error = ex.Message,
-                    status = HttpStatusCode.BadRequest,
-                });
+                return BadRequest(ex.Message);
             }
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Atualiza um vendedor", Description = "Este endpoint atualiza um vendedor.")]
         [Produces<VendedorEntity>]
         public IActionResult Put(int id, [FromBody] VendedorDto entity)
         {
             try
             {
-                var objModel = _applicationService.EditarDadosVendedor(id, entity);
-
-                if (objModel is not null)
-                    return Ok(objModel);
-
-                return BadRequest("Não foi possivel salvar os dados");
+                _applicationService.AtualizarVendedor(id, entity);
+                return Ok();
             }
             catch (Exception ex)
             {
-                return BadRequest(new
-                {
-                    Error = ex.Message,
-                    status = HttpStatusCode.BadRequest,
-                });
+                return BadRequest(ex.Message);
             }
         }
 
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Deleta um vendedor", Description = "Este endpoint deleta um vendedor.")]
         [Produces<VendedorEntity>]
         public IActionResult Delete(int id)
         {
-            var objModel = _applicationService.DeletarDadosVendedor(id);
-
-            if (objModel is not null)
-                return Ok(objModel);
-
-            return BadRequest("Não foi possivel deletar os dados");
+            try
+            {
+                _applicationService.DeletarVendedor(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

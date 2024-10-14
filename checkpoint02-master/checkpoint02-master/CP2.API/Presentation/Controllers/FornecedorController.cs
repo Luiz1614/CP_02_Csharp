@@ -24,40 +24,50 @@ namespace CP2.API.Presentation.Controllers
         [Produces<IEnumerable<FornecedorEntity>>]
         public IActionResult Get()
         {
-            var objModel = _applicationService.ObterTodosFornecedores();
+            try
+            {
+                var fornecedores = _applicationService.ObterTodosFornecedores();
 
-            if (objModel is not null)
-                return Ok(objModel);
-
-            return BadRequest("Não foi possivel obter os dados");
+                if (fornecedores == null)
+                    return NoContent();
+                return Ok(fornecedores);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Obtém um fornecedor por ID", Description = "Este endpoint retorna um fornecedor específico por ID.")]
         [Produces<FornecedorEntity>]
         public IActionResult GetPorId(int id)
         {
-            var objModel = _applicationService.ObterFornecedorPorId(id);
+            try
+            {
+                var fornecedor = _applicationService.ObterFornecedorPorId(id);
 
-            if (objModel is not null)
-                return Ok(objModel);
-
-            return BadRequest("Não foi possivel obter os dados");
+                if (fornecedor == null)
+                    return NoContent();
+                return Ok(fornecedor);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest();
+            }
         }
 
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Adiciona um novo fornecedor", Description = "Este endpoint adiciona um novo fornecedor.")]
         [Produces<FornecedorEntity>]
         public IActionResult Post([FromBody] FornecedorDto entity)
         {
             try
             {
-                var objModel = _applicationService.SalvarDadosFornecedor(entity);
-
-                if (objModel is not null)
-                    return Ok(objModel);
-
-                return BadRequest("Não foi possivel salvar os dados");
+                _applicationService.AdicionarFornecedor(entity);
+                return Created();
             }
             catch (Exception ex)
             {
@@ -70,17 +80,14 @@ namespace CP2.API.Presentation.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Atualiza um fornecedor", Description = "Este endpoint atualiza um fornecedor.")]
         [Produces<FornecedorEntity>]
         public IActionResult Put(int id, [FromBody] FornecedorDto entity)
         {
             try
             {
-                var objModel = _applicationService.EditarDadosFornecedor(id, entity);
-
-                if (objModel is not null)
-                    return Ok(objModel);
-
-                return BadRequest("Não foi possivel salvar os dados");
+                _applicationService.AtualizarFornecedor(id, entity);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -94,15 +101,23 @@ namespace CP2.API.Presentation.Controllers
 
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Deleta um fornecedor", Description = "Este endpoint deleta um fornecedor.")]
         [Produces<FornecedorEntity>]
         public IActionResult Delete(int id)
         {
-            var objModel = _applicationService.DeletarDadosFornecedor(id);
-
-            if (objModel is not null)
-                return Ok(objModel);
-
-            return BadRequest("Não foi possivel deletar os dados");
+            try
+            {
+                _applicationService.DeletarFornecedor(id);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(new
+                {
+                    Error = ex.Message,
+                    status = HttpStatusCode.BadRequest,
+                });
+            }
         }
     }
 }

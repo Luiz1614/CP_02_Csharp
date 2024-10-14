@@ -44,9 +44,9 @@ namespace CP2.API.Infrastructure.Data.Repositories
             return _context.Set<VendedorEntity>().Find(id);
         }
 
-        public IEnumerable<FornecedorEntity> ObterTodos()
+        public IEnumerable<VendedorEntity> ObterTodos()
         {
-            return _context.Set<FornecedorEntity>().ToList();
+            return _context.Set<VendedorEntity>().ToList();
         }
     }
 }

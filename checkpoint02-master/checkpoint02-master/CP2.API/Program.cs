@@ -7,17 +7,22 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddDbContext<ApplicationContext>(x => {
-    x.UseOracle(builder.Configuration.GetConnectionString("Oracle"));
+builder.Services.AddDbContext<ApplicationContext>(options =>
+{
+    options.UseOracle(builder.Configuration.GetConnectionString("Oracle"));
 });
 
 builder.Services.AddTransient<IFornecedorRepository, FornecedorRepository>();
+builder.Services.AddTransient<IFornecedorApplicationService, FornecedorApplicationService>();
+builder.Services.AddTransient<IVendedorRepository, VendedorRepository>();
+builder.Services.AddTransient<IVendedorApplicationService, VendedorApplicationService>();
+
 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
 
 builder.Services.AddSwaggerGen(c => {
     c.EnableAnnotations();
